@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Project 8 Fitness | Small group training in Haywards Heath</title>
-<meta name="description" content="Small group training in Haywards Heath, indoors and out. Strength and conditioning, functional movement, and mobility, all year round.">
+<meta name="description" content="Small group training in Haywards Heath. Strength and conditioning, functional movement, and mobility, indoors and outdoors, all year round.">
 <meta property="og:title" content="Project 8 Fitness">
-<meta property="og:description" content="Small group training in Haywards Heath, indoors and out. Train hard, together, whatever the weather.">
+<meta property="og:description" content="Training hard, together. Small group training in Haywards Heath, indoors and outdoors, all year round.">
 <meta name="theme-color" content="#F5F5F2">
 <link rel="canonical" href="https://project8fitness.co.uk/">
 <meta property="og:url" content="https://project8fitness.co.uk/">
@@ -213,47 +213,37 @@
   .lede { font-size: clamp(1.25rem, 2.2vw, 1.5rem); line-height: 1.4; max-width: 32rem; }
 
   .hero { padding-top: clamp(2rem, 6vw, 4.5rem) !important; }
-  .hero .lede { margin-top: 2rem; }
-  .hero .weather { margin-top: 1rem; color: var(--slate); max-width: 32rem; }
+  .hero .lede { margin-top: 2rem; font-weight: 600; }
+  .hero .sub-lede { margin-top: 1rem; color: var(--slate); max-width: 32rem; }
   .hero .actions { margin-top: 2.25rem; }
 
   /* ---------- A typical hour ---------- */
   .hour { margin-top: 2.75rem; max-width: 44rem; }
   .hour-caption { font-weight: 700; margin-bottom: .75rem; }
+  /* EDIT: the bar's proportions. Keep these numbers in step with the minutes in the key below. */
   .hour-bar {
     display: grid;
-    grid-template-columns: 10fr 15fr 20fr 5fr 10fr;
+    grid-template-columns: 10fr 20fr 10fr 5fr 5fr;
     border: 2px solid var(--ink);
     height: 3rem;
   }
   .hour-bar span + span { border-left: 2px solid var(--ink); }
-  .seg-warm { background: var(--board); }
-  .seg-strength { background: var(--rule); }
-  .seg-cond { background: var(--splash); }
-  .seg-finish { background: var(--ink); }
-  .seg-cool { background: var(--board); }
-  .hour-scale {
-    display: flex; justify-content: space-between;
-    font-size: .85rem; color: var(--slate); margin-top: .35rem;
-  }
+  .seg-mobility, .key-mobility::before { background: var(--board); }
+  .seg-cond, .key-cond::before { background: var(--splash); }
+  .seg-strength, .key-strength::before { background: var(--rule); }
+  .seg-finish, .key-finish::before { background: var(--ink); }
+  .seg-cool, .key-cool::before { background: var(--sheet); }
   .hour-key {
     list-style: none; padding: 0;
-    display: grid; grid-template-columns: 10fr 15fr 20fr 5fr 10fr;
+    display: flex; flex-wrap: wrap; gap: .6rem 1.75rem;
     margin-top: 1rem;
   }
-  .hour-key li { padding-right: .6rem; font-size: .95rem; line-height: 1.3; }
-  .hour-key b { display: block; font-family: var(--display); font-weight: 800; font-size: 1.15rem; text-transform: uppercase; }
-  .hour-key li:nth-child(4) { white-space: nowrap; }
+  .hour-key li { display: flex; align-items: center; gap: .55rem; font-size: 1rem; line-height: 1.3; }
+  .hour-key li::before { content: ""; flex: none; width: 1.75rem; height: .75rem; border: 2px solid var(--ink); }
+  .hour-key b { font-family: var(--display); font-weight: 800; font-size: 1.15rem; text-transform: uppercase; }
   @media (max-width: 40em) {
     .hour-bar { height: 2.25rem; }
-    .hour-key { display: block; }
-    .hour-key li { display: grid; grid-template-columns: 1rem 1fr; column-gap: .75rem; align-items: baseline; padding: .4rem 0; }
-    .hour-key li::before { content: ""; width: 1rem; height: 1rem; border: 2px solid var(--ink); align-self: center; grid-row: span 2; }
-    .hour-key li:nth-child(1)::before, .hour-key li:nth-child(5)::before { background: var(--board); }
-    .hour-key li:nth-child(2)::before { background: var(--rule); }
-    .hour-key li:nth-child(3)::before { background: var(--splash); }
-    .hour-key li:nth-child(4)::before { background: var(--ink); }
-    .hour-key li:nth-child(4) { white-space: normal; }
+    .hour-key { flex-direction: column; gap: .5rem; }
   }
 
   .two-up { display: grid; gap: 2rem; margin-top: 3rem; max-width: 46rem; }
@@ -319,8 +309,8 @@
   .checklist { list-style: none; padding: 0; max-width: var(--measure); }
   .checklist li { position: relative; padding: .45rem 0 .45rem 1.9rem; border-bottom: 1px solid var(--rule); }
   .checklist li::before {
-    content: ""; position: absolute; left: 0; top: .85rem;
-    width: .95rem; height: .95rem; border: 2px solid var(--ink); border-radius: 2px; background: var(--sheet);
+    content: ""; position: absolute; left: 0; top: 1.15rem;
+    width: .9rem; height: 3px; background: var(--ink);
   }
 
   /* ---------- Footer ---------- */
@@ -376,7 +366,7 @@
 
     <!-- Navigation on wide screens -->
     <nav class="sitenav only-wide" aria-label="Main">
-      <a href="#sessions">Sessions</a>
+      <a href="#sessions">Classes</a>
       <a href="#timetable">Timetable</a>
       <a href="#prices">Prices</a>
       <a href="#join">Join us</a>
@@ -387,46 +377,48 @@
 
       <!-- ===== Hero ===== -->
       <section class="hero" id="top" aria-labelledby="hero-title">
-        <h1 id="hero-title">Train hard, together, whatever the weather</h1>
-        <p class="lede">Small group training in Haywards Heath, indoors and out. Strength and conditioning, functional movement, and mobility, coached in hour-long sessions for every age, ability, and level of fitness.</p>
-        <p class="weather">We train all year round, in sun, rain, wind, frost, and quite a lot of mud.</p>
+        <h1 id="hero-title">Training hard, together</h1>
+        <p class="lede">Small group training in Haywards Heath.</p>
+        <p class="sub-lede">Strength and conditioning, functional movement, and mobility, coached in sessions for every level of fitness. We train indoors and outdoors all year round, whatever the weather.</p>
         <div class="actions">
           <a class="btn btn-primary" href="https://link.wunderbook.com/tenant?tenantName=EightK_Strength_and_Conditioning_">Book a class</a>
           <a class="btn btn-secondary" href="https://chat.whatsapp.com/E7EImlLAe939xJwlFUDhMU">Join our WhatsApp community</a>
         </div>
       </section>
 
-      <!-- ===== What a session is like ===== -->
+      <!-- ===== What our classes are like ===== -->
       <section id="sessions" aria-labelledby="sessions-title">
-        <h2 id="sessions-title">What a session&rsquo;s like</h2>
+        <h2 id="sessions-title">What our classes are like</h2>
         <div class="prose">
-          <p>Every session is an hour long, in a small group, so the coaches know your name and can see how you&rsquo;re moving. We build strength, then turn up the heat with short, sharp intervals: work hard, rest, go again. Some nights it&rsquo;s a proper bootcamp, with sprints, crawls, carries, and partner challenges on the grass.</p>
-          <p>Every exercise has options to scale it up or down, so you work hard at your level, not someone else&rsquo;s.</p>
+          <!-- This first line is adapted from Stephen's 8K Fitness description -->
+          <p class="lede">We believe everyone deserves to feel stronger, move better, and enjoy being active, whatever their age, ability, or experience.</p>
+          <p>Every session is an hour long and each is different. We build useful strength, cultivate mobility, and improve fitness through fun and challenging circuits. We work hard, rest, then go again.</p>
+          <p>Our classes use ideas from a range of disciplines and include options to scale each exercise up or down, so you&rsquo;ll be exercising at your own level.</p>
         </div>
 
         <figure class="hour">
           <figcaption class="hour-caption">A typical hour (no two are quite the same)</figcaption>
           <div class="hour-bar" aria-hidden="true">
-            <span class="seg-warm"></span><span class="seg-strength"></span><span class="seg-cond"></span><span class="seg-finish"></span><span class="seg-cool"></span>
+            <span class="seg-mobility"></span><span class="seg-cond"></span><span class="seg-strength"></span><span class="seg-finish"></span><span class="seg-cool"></span>
           </div>
-          <div class="hour-scale only-wide" aria-hidden="true"><span>0</span><span>15</span><span>30</span><span>45</span><span>60 min</span></div>
+          <!-- EDIT: the parts of a typical hour. If you change the minutes, change the bar's proportions in the CSS too. -->
           <ol class="hour-key">
-            <li><b>Warm-up</b> 10 min</li>
-            <li><b>Strength</b> 15 min</li>
-            <li><b>Conditioning</b> 20 min of intervals and circuits</li>
-            <li><b>Finisher</b> 5 min</li>
-            <li><b>Cool-down</b> 10 min of mobility and stretching</li>
+            <li class="key-mobility"><b>Mobility</b> 10 min</li>
+            <li class="key-cond"><b>Conditioning</b> 20 min</li>
+            <li class="key-strength"><b>Strength</b> 10 min</li>
+            <li class="key-finish"><b>Finisher</b> 5 min</li>
+            <li class="key-cool"><b>Cool-down</b> 5 min</li>
           </ol>
         </figure>
 
         <div class="two-up">
           <div>
             <h3>Outdoors</h3>
-            <p>Tuesday, Thursday, and Sunday. Bodyweight work, running, and partner drills in every season. On dark evenings, wear something bright or reflective.</p>
+            <p>Bootcamp-style classes on Tuesday, Thursday, and Sunday. Bodyweight work, running, and partner drills in every season.</p>
           </div>
           <div>
             <h3>Indoors</h3>
-            <p>Wednesday evening at Ashenground Community Centre. The same hard work with a roof over our heads, and out on the grass when summer comes.</p>
+            <p>Wednesday evening at Ashenground Community Centre. The same hard work, but with less running and more shelter. Indoors, we also offer slower, more targeted, and mobility-focused sessions.</p>
           </div>
         </div>
       </section>
@@ -459,14 +451,14 @@
               <tr><th scope="col">Day</th><th scope="col">Time</th><th scope="col">Where</th><th scope="col" class="num">Indoors or out</th></tr>
             </thead>
             <tbody>
-              <tr><th scope="row">Tuesday</th><td class="time">6.30pm</td><td class="where">120 South Road<small>Haywards Heath RH16 4LT</small></td><td class="kind num">Outdoors</td></tr>
-              <tr><th scope="row">Wednesday</th><td class="time">7.15pm</td><td class="where">Ashenground Community Centre<small>Southdown Close, RH16 4JR</small></td><td class="kind num">Indoors</td></tr>
-              <tr><th scope="row">Thursday</th><td class="time">6.30pm</td><td class="where">120 South Road<small>Haywards Heath RH16 4LT</small></td><td class="kind num">Outdoors</td></tr>
-              <tr><th scope="row">Sunday</th><td class="time">8am</td><td class="where">120 South Road<small>Haywards Heath RH16 4LT</small></td><td class="kind num">Outdoors</td></tr>
+              <tr><th scope="row">Tuesday</th><td class="time">6.30pm</td><td class="where">Opposite Duck&rsquo;s, South Road</td><td class="kind num">Outdoors</td></tr>
+              <tr><th scope="row">Wednesday</th><td class="time">7.15pm</td><td class="where">Ashenground Community Centre<small>Southdown Close</small></td><td class="kind num">Indoors</td></tr>
+              <tr><th scope="row">Thursday</th><td class="time">6.30pm</td><td class="where">Opposite Duck&rsquo;s, South Road</td><td class="kind num">Outdoors</td></tr>
+              <tr><th scope="row">Sunday</th><td class="time">8am</td><td class="where">Opposite Duck&rsquo;s, South Road</td><td class="kind num">Outdoors</td></tr>
             </tbody>
           </table>
           <div class="sheet-notes">
-            <p>Every class lasts an hour. Book ahead so we know you&rsquo;re coming. If the weather means a change of plan, we&rsquo;ll post it in the WhatsApp community.</p>
+            <p>Every class lasts an hour. Book ahead so we know you&rsquo;re coming. If there&rsquo;s any change of plan, we&rsquo;ll post it in the WhatsApp community.</p>
           </div>
         </div>
 
@@ -476,23 +468,21 @@
           <table class="prices">
             <tbody>
               <tr class="group-row"><th scope="rowgroup" colspan="2">New to Project 8</th></tr>
-              <tr><th scope="row"><span class="marked">Starter pack: 3 classes</span><span class="sub">For your first visits. Use within 4 weeks.</span></th><td class="num">£18</td></tr>
+              <tr><th scope="row"><span class="marked">Starter pack: 3 classes</span><span class="sub">Try us out!</span></th><td class="num">£18</td></tr>
 
               <tr class="group-row"><th scope="rowgroup" colspan="2">Class packs</th></tr>
-              <tr><th scope="row">5 classes<span class="sub">£8 a class. Use within 2 months.</span></th><td class="num">£40</td></tr>
-              <tr><th scope="row">10 classes<span class="sub">£7.50 a class. Use within 4 months.</span></th><td class="num">£75</td></tr>
-              <tr><th scope="row">20 classes<span class="sub">£7 a class. Use within 6 months.</span></th><td class="num">£140</td></tr>
+              <tr><th scope="row">5 classes<span class="sub">£8 a class</span></th><td class="num">£40</td></tr>
+              <tr><th scope="row">10 classes<span class="sub">£7.50 a class</span></th><td class="num">£75</td></tr>
+              <tr><th scope="row">20 classes<span class="sub">£7 a class</span></th><td class="num">£140</td></tr>
 
               <tr class="group-row"><th scope="rowgroup" colspan="2">Pay as you go</th></tr>
-              <tr><th scope="row">Outdoor class</th><td class="num">£10</td></tr>
-              <tr><th scope="row">Indoor class</th><td class="num">£11</td></tr>
+              <tr><th scope="row">One class</th><td class="num">£10</td></tr>
             </tbody>
           </table>
           <div class="sheet-notes">
-            <p>Class packs work for any class, indoors or out.</p>
+            <p>Every class costs the same, indoors or out, and class packs work for all of them.</p>
             <p>Wunderbook adds a 2% booking fee when you pay.</p>
-            <!-- EDIT: keep, change or remove this line -->
-            <p><strong>If money&rsquo;s tight, talk to us.</strong> We&rsquo;d rather find a way than have you miss out.</p>
+            <p><strong>If money&rsquo;s tight, talk to us.</strong> This is a community-focused thing, after all.</p>
           </div>
         </div>
       </section>
@@ -504,13 +494,13 @@
           <div class="coach">
             <h3>Stephen Luxton</h3>
             <p class="role">Strength and conditioning coach</p>
-            <p>Stephen has over 10 years&rsquo; experience across specialist healthcare and the fitness industry. He started 8K Fitness, the classes that grew into Project 8, and he&rsquo;ll help you understand how your body moves, and get it moving better.</p>
+            <p>Stephen has over 10 years&rsquo; experience across specialist healthcare and the fitness industry. He started 8K Fitness, which has grown into Project 8, and he&rsquo;ll help you understand how your body moves, and get it moving better.</p>
           </div>
           <div class="coach">
             <!-- EDIT: Tom's bio is a draft -->
             <h3>Tom Bond</h3>
             <p class="role">Fitness instructor</p>
-            <p>Tom founded Sussex RunFest, Haywards Heath&rsquo;s community running and wellbeing festival. He coaches alongside Stephen and loves a group where everyone pushes each other on.</p>
+            <p>Tom founded Sussex RunFest, Haywards Heath&rsquo;s community running and wellbeing festival. He coaches alongside Stephen and loves a group where everyone pushes each other on. And good form.</p>
           </div>
         </div>
       </section>
@@ -530,7 +520,7 @@
 
         <div class="join-block">
           <h3>Join our WhatsApp community</h3>
-          <p>The best place to ask questions, hear about new sessions, and find out if the weather has changed the plan.</p>
+          <p>Ask questions, hear about each week&rsquo;s sessions, and chat to the rest of the community.</p>
           <div class="actions">
             <a class="btn btn-secondary" href="https://chat.whatsapp.com/E7EImlLAe939xJwlFUDhMU">Join on WhatsApp</a>
           </div>
@@ -541,9 +531,9 @@
           <ul class="checklist">
             <li>Arrive 10 minutes early so we can say hello.</li>
             <li>Tell us about any injuries or health conditions before we start.</li>
-            <li>Bring water, and wear layers you can move in.</li>
-            <li>Trainers with some grip are best for wet grass.</li>
-            <li>On dark evenings, wear something bright or reflective.</li>
+            <li>Bring water (and a yoga or camping mat for indoor classes).</li>
+            <li>Wear layers you can move in.</li>
+            <li>Trainers with grip if it&rsquo;s wet out.</li>
           </ul>
         </div>
       </section>
