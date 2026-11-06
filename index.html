@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project 8 Fitness | Small group training in Haywards Heath</title>
+<meta name="description" content="Small group training in Haywards Heath, indoors and out. Strength and conditioning, functional movement, and mobility, all year round.">
+<meta property="og:title" content="Project 8 Fitness">
+<meta property="og:description" content="Small group training in Haywards Heath, indoors and out. Train hard, together, whatever the weather.">
+<meta name="theme-color" content="#F5F5F2">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Fonts are stored in this repo, so the site makes no third-party requests and needs no cookie banner. */
+  @font-face { font-family: "Barlow Condensed"; src: url("assets/fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Barlow Condensed"; src: url("assets/fonts/barlow-condensed-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+  @font-face { font-family: "Atkinson Hyperlegible Next"; src: url("assets/fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
+
+  /* ---------- Colours ----------
+     The base is off-white and grey. --splash is the one accent colour: change it here to
+     try another. --on-splash is the text colour that sits on top of it. */
+  :root {
+    --paper: #F5F5F2;
+    --sheet: #FFFFFF;
+    --board: #E6E7E3;
+    --rule: #A9ABA6;
+    --slate: #5A5D58;
+    --ink: #23251F;
+    --splash: #FF5B1A;
+    --on-splash: #23251F;
+
+    --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --text: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+    --measure: 36rem;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background-color: var(--paper);
+    /* A faint grain, so the off-white feels like a surface rather than a screen. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.14 0 0 0 0 0.15 0 0 0 0 0.12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: 1.125rem;
+    line-height: 1.55;
+  }
+  p, li { text-wrap: pretty; }
+
+  a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: .18em; text-decoration-color: var(--splash); }
+  a:hover { text-decoration-color: var(--ink); }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+  img { display: block; max-width: 100%; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .skip { position: absolute; left: 1rem; top: -4rem; background: var(--ink); color: var(--paper); padding: .5rem 1rem; z-index: 10; }
+  .skip:focus { top: 1rem; }
+
+  /* ---------- Page layout: the pillar on the left, everything else on the right ---------- */
+  .page {
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+  }
+  @media (min-width: 62.5em) {
+    .page { display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); column-gap: clamp(3rem, 6vw, 6.5rem); }
+    .only-narrow { display: none !important; }
+  }
+  @media (max-width: 62.49em) {
+    .only-wide { display: none !important; }
+  }
+
+  /* ---------- Display type ---------- */
+  h1, h2, .h2 {
+    font-family: var(--display);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: .9;
+    letter-spacing: .005em;
+  }
+  h1 { font-size: clamp(3.4rem, 9vw, 6.25rem); max-width: 9.5em; }
+  h2 { font-size: clamp(2.4rem, 5.5vw, 3.4rem); margin-bottom: 1.5rem; }
+  h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.05;
+    margin-bottom: .4rem;
+  }
+
+  /* ---------- Buttons ---------- */
+  .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .btn {
+    display: inline-block;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.3rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    text-decoration: none;
+    padding: .85rem 1.2rem .8rem;
+    border: 2px solid var(--ink);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn-primary { background: var(--splash); color: var(--on-splash); box-shadow: 3px 3px 0 var(--ink); }
+  .btn-primary:hover { box-shadow: 1px 1px 0 var(--ink); transform: translate(2px, 2px); }
+  .btn-secondary:hover { background: var(--board); }
+  @media (prefers-reduced-motion: reduce) { .btn-primary:hover { transform: none; } }
+
+  /* ---------- The pillar: wordmark, then the eight ways on a line ---------- */
+  .pillar {
+    position: sticky; top: 0;
+    align-self: start;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding-block: 2.5rem;
+  }
+  .brand { display: inline-block; }
+  .pillar .brand { display: block; }
+  .pillar .brand img { width: 100%; height: auto; }
+
+  .ways-title {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1.1;
+    color: var(--slate);
+    margin: 2.25rem 0 0;
+    padding-left: 1.6rem;
+    position: relative;
+  }
+  .ways {
+    list-style: none;
+    padding: 0;
+    position: relative;
+  }
+  /* The line runs from the wordmark down through every way. */
+  .ways::before {
+    content: "";
+    position: absolute;
+    left: 5px; top: -3.3rem; bottom: .9rem;
+    width: 2px;
+    background: var(--ink);
+  }
+  .ways li {
+    position: relative;
+    padding: .55rem 0 .55rem 1.6rem;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.6rem;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .ways li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    width: 12px; height: 12px;
+    margin-top: -6px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+  }
+  .ways li:last-child::before { background: var(--splash); }
+  .ways-note { font-size: .95rem; color: var(--slate); margin-top: 1rem; padding-left: 1.6rem; max-width: 15rem; }
+
+  /* In the narrow layout, the eight ways sit in the page as their own section. */
+  .ways-section .ways { margin-top: 2.5rem; columns: 2; column-gap: 1.5rem; }
+  .ways-section .ways::before { display: none; }
+  .ways-section .ways li { break-inside: avoid; }
+  .ways-section .ways-wrap { position: relative; }
+  .ways-section .ways-wrap::before {
+    content: ""; position: absolute; left: 5px; top: -2.5rem; bottom: .9rem; width: 2px; background: var(--ink);
+  }
+  @media (max-width: 30em) {
+    .ways-section .ways { columns: 1; }
+  }
+  @media (min-width: 30.01em) {
+    .ways-section .ways-wrap::before { display: none; }
+  }
+
+  /* ---------- Top bars ---------- */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding-block: 1.25rem;
+  }
+  .topbar .brand img { height: 2.9rem; width: auto; }
+  .topbar .btn { font-size: 1.1rem; padding: .65rem .9rem .6rem; }
+  .sitenav {
+    display: flex; align-items: center; justify-content: flex-end; gap: 1.75rem;
+    padding-block: 2.5rem 0;
+  }
+  .sitenav a:not(.btn) {
+    font-family: var(--display); font-weight: 700; font-size: 1.25rem;
+    text-decoration: none;
+  }
+  .sitenav a:not(.btn):hover { text-decoration: underline; text-decoration-color: var(--splash); }
+  .sitenav .btn { font-size: 1.1rem; padding: .65rem .9rem .6rem; }
+
+  /* ---------- Sections ---------- */
+  main > section { padding-block: clamp(3.5rem, 8vw, 5.5rem); }
+  main > section + section { border-top: 2px solid var(--ink); }
+  .prose { max-width: var(--measure); }
+  .prose p + p { margin-top: 1rem; }
+  .lede { font-size: clamp(1.25rem, 2.2vw, 1.5rem); line-height: 1.4; max-width: 32rem; }
+
+  .hero { padding-top: clamp(2rem, 6vw, 4.5rem) !important; }
+  .hero .lede { margin-top: 2rem; }
+  .hero .weather { margin-top: 1rem; color: var(--slate); max-width: 32rem; }
+  .hero .actions { margin-top: 2.25rem; }
+
+  /* ---------- A typical hour ---------- */
+  .hour { margin-top: 2.75rem; max-width: 44rem; }
+  .hour-caption { font-weight: 700; margin-bottom: .75rem; }
+  .hour-bar {
+    display: grid;
+    grid-template-columns: 10fr 15fr 20fr 5fr 10fr;
+    border: 2px solid var(--ink);
+    height: 3rem;
+  }
+  .hour-bar span + span { border-left: 2px solid var(--ink); }
+  .seg-warm { background: var(--board); }
+  .seg-strength { background: var(--rule); }
+  .seg-cond { background: var(--splash); }
+  .seg-finish { background: var(--ink); }
+  .seg-cool { background: var(--board); }
+  .hour-scale {
+    display: flex; justify-content: space-between;
+    font-size: .85rem; color: var(--slate); margin-top: .35rem;
+  }
+  .hour-key {
+    list-style: none; padding: 0;
+    display: grid; grid-template-columns: 10fr 15fr 20fr 5fr 10fr;
+    margin-top: 1rem;
+  }
+  .hour-key li { padding-right: .6rem; font-size: .95rem; line-height: 1.3; }
+  .hour-key b { display: block; font-family: var(--display); font-weight: 800; font-size: 1.15rem; text-transform: uppercase; }
+  .hour-key li:nth-child(4) { white-space: nowrap; }
+  @media (max-width: 40em) {
+    .hour-bar { height: 2.25rem; }
+    .hour-key { display: block; }
+    .hour-key li { display: grid; grid-template-columns: 1rem 1fr; column-gap: .75rem; align-items: baseline; padding: .4rem 0; }
+    .hour-key li::before { content: ""; width: 1rem; height: 1rem; border: 2px solid var(--ink); align-self: center; grid-row: span 2; }
+    .hour-key li:nth-child(1)::before, .hour-key li:nth-child(5)::before { background: var(--board); }
+    .hour-key li:nth-child(2)::before { background: var(--rule); }
+    .hour-key li:nth-child(3)::before { background: var(--splash); }
+    .hour-key li:nth-child(4)::before { background: var(--ink); }
+    .hour-key li:nth-child(4) { white-space: normal; }
+  }
+
+  .two-up { display: grid; gap: 2rem; margin-top: 3rem; max-width: 46rem; }
+  @media (min-width: 40em) { .two-up { grid-template-columns: 1fr 1fr; gap: 2.5rem; } }
+
+  /* ---------- Sheets: timetable and prices, pinned up like a notice ---------- */
+  .sheet {
+    position: relative;
+    background: var(--sheet);
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    max-width: 44rem;
+    box-shadow: 0 1px 1px rgba(35,37,31,.08), 0 14px 28px -18px rgba(35,37,31,.45);
+    transform: rotate(-.45deg);
+  }
+  .sheet + .sheet { margin-top: 3.5rem; transform: rotate(.35deg); }
+  .sheet::before, .sheet::after {
+    content: "";
+    position: absolute; top: -.8rem;
+    width: 5.5rem; height: 1.6rem;
+    background: rgba(206, 203, 190, .72);
+    box-shadow: 0 1px 1px rgba(35,37,31,.06);
+  }
+  .sheet::before { left: 1.25rem; transform: rotate(-4deg); }
+  .sheet::after { right: 1.25rem; transform: rotate(5deg); }
+  .sheet h2 { margin-bottom: 1.25rem; }
+
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; vertical-align: baseline; padding: .8rem .75rem .8rem 0; border-bottom: 1px solid var(--rule); }
+  thead th { font-size: .9rem; font-weight: 400; color: var(--slate); padding-top: 0; border-bottom: 2px solid var(--ink); }
+  tbody th { font-weight: 700; }
+  td.num, th.num { text-align: right; padding-right: 0; white-space: nowrap; }
+  .prices td.num { font-family: var(--display); font-weight: 800; font-size: 1.6rem; line-height: 1; }
+  .where small { display: block; color: var(--slate); font-size: .9rem; }
+  .group-row th {
+    font-family: var(--display); font-weight: 800; font-size: 1.35rem; text-transform: uppercase;
+    padding-top: 1.5rem; border-bottom: 2px solid var(--ink);
+  }
+  .group-row:first-child th { padding-top: 0; }
+  .sub { display: block; font-weight: 400; color: var(--slate); font-size: .95rem; }
+  /* A highlighter mark, as if someone ran a pen over the printout. */
+  .marked { background: linear-gradient(transparent 22%, color-mix(in srgb, var(--splash) 38%, transparent) 22%, color-mix(in srgb, var(--splash) 38%, transparent) 94%, transparent 94%); padding-inline: .2em; margin-left: -.2em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .sheet-notes { margin-top: 1.25rem; font-size: 1rem; color: var(--slate); }
+  .sheet-notes p + p { margin-top: .5rem; }
+  .sheet-notes strong { color: var(--ink); }
+  @media (max-width: 34em) {
+    .sheet, .sheet + .sheet { transform: none; }
+    .timetable thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .timetable tr { display: grid; grid-template-columns: auto 1fr auto; column-gap: .6rem; border-bottom: 1px solid var(--rule); padding: .8rem 0; }
+    .timetable th, .timetable td { border: 0; padding: 0; }
+    .timetable td.where { grid-column: 1 / -1; grid-row: 2; margin-top: .2rem; }
+    .timetable td.kind { grid-column: 3; grid-row: 1; }
+  }
+
+  /* ---------- Coaches ---------- */
+  .coach p { max-width: var(--measure); }
+  .coach .role { color: var(--slate); margin-bottom: .6rem; }
+
+  /* ---------- Join ---------- */
+  .join-block + .join-block { margin-top: 2.75rem; }
+  .join-block p { max-width: var(--measure); }
+  .join-block .actions { margin-top: 1.1rem; }
+  .applinks { margin-top: .9rem; font-size: 1rem; color: var(--slate); }
+  .checklist { list-style: none; padding: 0; max-width: var(--measure); }
+  .checklist li { position: relative; padding: .45rem 0 .45rem 1.9rem; border-bottom: 1px solid var(--rule); }
+  .checklist li::before {
+    content: ""; position: absolute; left: 0; top: .85rem;
+    width: .95rem; height: .95rem; border: 2px solid var(--ink); border-radius: 2px; background: var(--sheet);
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer {
+    border-top: 2px solid var(--ink);
+    padding-block: 2rem 3rem;
+    font-size: .95rem; color: var(--slate);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem;
+  }
+
+  /* ---------- Colour tryout panel (only appears with ?colours on the end of the address) ---------- */
+  .tryout {
+    position: fixed; right: 1rem; bottom: 1rem; z-index: 20;
+    background: var(--sheet); border: 2px solid var(--ink); border-radius: 4px;
+    padding: .75rem .85rem; font-size: .9rem; box-shadow: 3px 3px 0 var(--ink);
+  }
+  .tryout p { font-weight: 700; margin-bottom: .5rem; }
+  .tryout div { display: flex; gap: .4rem; }
+  .tryout button {
+    width: 2rem; height: 2rem; border: 2px solid var(--ink); border-radius: 50%; cursor: pointer; padding: 0;
+  }
+  .tryout button[aria-pressed="true"] { outline: 3px solid var(--ink); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="page">
+
+  <!-- ===== The pillar (wide screens only). EDIT the eight ways here AND in the "ways" section further down. ===== -->
+  <aside class="pillar only-wide" aria-label="Project 8 Fitness">
+    <a class="brand" href="#top"><img src="assets/wordmark.svg" alt="Project 8 Fitness" width="248" height="92"></a>
+    <p class="ways-title">Eight ways we progress</p>
+    <ul class="ways">
+      <li>Growth</li>
+      <li>Community</li>
+      <li>Kindness</li>
+      <li>Fitness</li>
+      <li>Fitness</li>
+      <li>Fitness</li>
+      <li>Fitness</li>
+      <li>Fitness</li>
+    </ul>
+  </aside>
+
+  <div class="content">
+
+    <!-- Top bar on phones and small screens -->
+    <header class="topbar only-narrow">
+      <a class="brand" href="#top"><img src="assets/wordmark.svg" alt="Project 8 Fitness" width="124" height="46"></a>
+      <a class="btn btn-primary" href="https://link.wunderbook.com/tenant?tenantName=EightK_Strength_and_Conditioning_">Book</a>
+    </header>
+
+    <!-- Navigation on wide screens -->
+    <nav class="sitenav only-wide" aria-label="Main">
+      <a href="#sessions">Sessions</a>
+      <a href="#timetable">Timetable</a>
+      <a href="#prices">Prices</a>
+      <a href="#join">Join us</a>
+      <a class="btn btn-primary" href="https://link.wunderbook.com/tenant?tenantName=EightK_Strength_and_Conditioning_">Book a class</a>
+    </nav>
+
+    <main id="main">
+
+      <!-- ===== Hero ===== -->
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <h1 id="hero-title">Train hard, together, whatever the weather</h1>
+        <p class="lede">Small group training in Haywards Heath, indoors and out. Strength and conditioning, functional movement, and mobility, coached in hour-long sessions for every age, ability, and level of fitness.</p>
+        <p class="weather">We train all year round, in sun, rain, wind, frost, and quite a lot of mud.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://link.wunderbook.com/tenant?tenantName=EightK_Strength_and_Conditioning_">Book a class</a>
+          <a class="btn btn-secondary" href="https://chat.whatsapp.com/E7EImlLAe939xJwlFUDhMU">Join our WhatsApp community</a>
+        </div>
+      </section>
+
+      <!-- ===== What a session is like ===== -->
+      <section id="sessions" aria-labelledby="sessions-title">
+        <h2 id="sessions-title">What a session&rsquo;s like</h2>
+        <div class="prose">
+          <p>Every session is an hour long, in a small group, so the coaches know your name and can see how you&rsquo;re moving. We build strength, then turn up the heat with short, sharp intervals: work hard, rest, go again. Some nights it&rsquo;s a proper bootcamp, with sprints, crawls, carries, and partner challenges on the grass.</p>
+          <p>Every exercise has options to scale it up or down, so you work hard at your level, not someone else&rsquo;s.</p>
+        </div>
+
+        <figure class="hour">
+          <figcaption class="hour-caption">A typical hour (no two are quite the same)</figcaption>
+          <div class="hour-bar" aria-hidden="true">
+            <span class="seg-warm"></span><span class="seg-strength"></span><span class="seg-cond"></span><span class="seg-finish"></span><span class="seg-cool"></span>
+          </div>
+          <div class="hour-scale only-wide" aria-hidden="true"><span>0</span><span>15</span><span>30</span><span>45</span><span>60 min</span></div>
+          <ol class="hour-key">
+            <li><b>Warm-up</b> 10 min</li>
+            <li><b>Strength</b> 15 min</li>
+            <li><b>Conditioning</b> 20 min of intervals and circuits</li>
+            <li><b>Finisher</b> 5 min</li>
+            <li><b>Cool-down</b> 10 min of mobility and stretching</li>
+          </ol>
+        </figure>
+
+        <div class="two-up">
+          <div>
+            <h3>Outdoors</h3>
+            <p>Tuesday, Thursday, and Sunday. Bodyweight work, running, and partner drills in every season. On dark evenings, wear something bright or reflective.</p>
+          </div>
+          <div>
+            <h3>Indoors</h3>
+            <p>Wednesday evening at Ashenground Community Centre. The same hard work with a roof over our heads, and out on the grass when summer comes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Eight ways (narrow screens only). EDIT these AND the list in the pillar at the top. ===== -->
+      <section class="ways-section only-narrow" id="eight-ways" aria-labelledby="ways-title-narrow">
+        <h2 id="ways-title-narrow">Eight ways we progress</h2>
+        <p class="prose">The 8 in our name stands for eight things we work on together, in every session.</p>
+        <div class="ways-wrap">
+          <ul class="ways">
+            <li>Growth</li>
+            <li>Community</li>
+            <li>Kindness</li>
+            <li>Fitness</li>
+            <li>Fitness</li>
+            <li>Fitness</li>
+            <li>Fitness</li>
+            <li>Fitness</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== Timetable and prices ===== -->
+      <section id="timetable" aria-labelledby="timetable-title">
+        <!-- EDIT: class times and places. Each class is one row (<tr>). -->
+        <div class="sheet">
+          <h2 id="timetable-title">Timetable</h2>
+          <table class="timetable">
+            <thead>
+              <tr><th scope="col">Day</th><th scope="col">Time</th><th scope="col">Where</th><th scope="col" class="num">Indoors or out</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Tuesday</th><td class="time">6.30pm</td><td class="where">120 South Road<small>Haywards Heath RH16 4LT</small></td><td class="kind num">Outdoors</td></tr>
+              <tr><th scope="row">Wednesday</th><td class="time">7.15pm</td><td class="where">Ashenground Community Centre<small>Southdown Close, RH16 4JR</small></td><td class="kind num">Indoors</td></tr>
+              <tr><th scope="row">Thursday</th><td class="time">6.30pm</td><td class="where">120 South Road<small>Haywards Heath RH16 4LT</small></td><td class="kind num">Outdoors</td></tr>
+              <tr><th scope="row">Sunday</th><td class="time">8am</td><td class="where">120 South Road<small>Haywards Heath RH16 4LT</small></td><td class="kind num">Outdoors</td></tr>
+            </tbody>
+          </table>
+          <div class="sheet-notes">
+            <p>Every class lasts an hour. Book ahead so we know you&rsquo;re coming. If the weather means a change of plan, we&rsquo;ll post it in the WhatsApp community.</p>
+          </div>
+        </div>
+
+        <!-- EDIT: prices. These are placeholders. -->
+        <div class="sheet" id="prices">
+          <h2>Prices</h2>
+          <table class="prices">
+            <tbody>
+              <tr class="group-row"><th scope="rowgroup" colspan="2">New to Project 8</th></tr>
+              <tr><th scope="row"><span class="marked">Starter pack: 3 classes</span><span class="sub">For your first visits. Use within 4 weeks.</span></th><td class="num">£18</td></tr>
+
+              <tr class="group-row"><th scope="rowgroup" colspan="2">Class packs</th></tr>
+              <tr><th scope="row">5 classes<span class="sub">£8 a class. Use within 2 months.</span></th><td class="num">£40</td></tr>
+              <tr><th scope="row">10 classes<span class="sub">£7.50 a class. Use within 4 months.</span></th><td class="num">£75</td></tr>
+              <tr><th scope="row">20 classes<span class="sub">£7 a class. Use within 6 months.</span></th><td class="num">£140</td></tr>
+
+              <tr class="group-row"><th scope="rowgroup" colspan="2">Pay as you go</th></tr>
+              <tr><th scope="row">Outdoor class</th><td class="num">£10</td></tr>
+              <tr><th scope="row">Indoor class</th><td class="num">£11</td></tr>
+            </tbody>
+          </table>
+          <div class="sheet-notes">
+            <p>Class packs work for any class, indoors or out.</p>
+            <p>Wunderbook adds a 2% booking fee when you pay.</p>
+            <!-- EDIT: keep, change or remove this line -->
+            <p><strong>If money&rsquo;s tight, talk to us.</strong> We&rsquo;d rather find a way than have you miss out.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Coaches ===== -->
+      <section id="coaches" aria-labelledby="coaches-title">
+        <h2 id="coaches-title">Who coaches you</h2>
+        <div class="two-up" style="margin-top:0">
+          <div class="coach">
+            <h3>Stephen Luxton</h3>
+            <p class="role">Strength and conditioning coach</p>
+            <p>Stephen has over 10 years&rsquo; experience across specialist healthcare and the fitness industry. He started 8K Fitness, the classes that grew into Project 8, and he&rsquo;ll help you understand how your body moves, and get it moving better.</p>
+          </div>
+          <div class="coach">
+            <!-- EDIT: Tom's bio is a draft -->
+            <h3>Tom Bond</h3>
+            <p class="role">Fitness instructor</p>
+            <p>Tom founded Sussex RunFest, Haywards Heath&rsquo;s community running and wellbeing festival. He coaches alongside Stephen and loves a group where everyone pushes each other on.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Join ===== -->
+      <section id="join" aria-labelledby="join-title">
+        <h2 id="join-title">Join us</h2>
+
+        <div class="join-block">
+          <h3>Book a class</h3>
+          <p>We take bookings and payments through Wunderbook. You can book in your browser, or download the Wunderbook 2.0 app.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://link.wunderbook.com/tenant?tenantName=EightK_Strength_and_Conditioning_">Book on Wunderbook</a>
+          </div>
+          <p class="applinks">Get the app for <a href="https://apps.apple.com/app/id6739131717">iPhone</a> or <a href="https://play.google.com/store/apps/details?id=com.wunderbookpilot.poc">Android</a>.</p>
+        </div>
+
+        <div class="join-block">
+          <h3>Join our WhatsApp community</h3>
+          <p>The best place to ask questions, hear about new sessions, and find out if the weather has changed the plan.</p>
+          <div class="actions">
+            <a class="btn btn-secondary" href="https://chat.whatsapp.com/E7EImlLAe939xJwlFUDhMU">Join on WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="join-block">
+          <h3>Your first session</h3>
+          <ul class="checklist">
+            <li>Arrive 10 minutes early so we can say hello.</li>
+            <li>Tell us about any injuries or health conditions before we start.</li>
+            <li>Bring water, and wear layers you can move in.</li>
+            <li>Trainers with some grip are best for wet grass.</li>
+            <li>On dark evenings, wear something bright or reflective.</li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <p>Project 8 Fitness, Haywards Heath, West Sussex</p>
+      <!-- EDIT: once the company is registered, the law requires these details on the website. Uncomment and fill in:
+      <p>Project 8 Fitness Ltd is registered in England and Wales, company number 00000000. Registered office: [address].</p>
+      -->
+      <p>&copy; 2026 Project 8 Fitness</p>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+  /* Colour tryout: add ?colours to the end of the address to show a small panel for
+     trying different splash colours. Delete this script once you've chosen. */
+  (function () {
+    if (!/[?&]colours/.test(location.search) && !window.P8_SHOW_COLOURS) return;
+    var options = [
+      ["Cone orange", "#FF5B1A", "#23251F"],
+      ["Hi-vis yellow", "#E4F000", "#23251F"],
+      ["Pitch green", "#1FA45B", "#23251F"],
+      ["Signal blue", "#2457FF", "#FFFFFF"],
+      ["Bib pink", "#FF6FAE", "#23251F"],
+      ["No colour", "#23251F", "#F5F5F2"]
+    ];
+    var panel = document.createElement("div");
+    panel.className = "tryout";
+    panel.innerHTML = "<p>Try a splash colour</p><div></div>";
+    var row = panel.querySelector("div");
+    options.forEach(function (o, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.style.background = o[1];
+      b.title = o[0];
+      b.setAttribute("aria-label", o[0]);
+      b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+      b.addEventListener("click", function () {
+        document.documentElement.style.setProperty("--splash", o[1]);
+        document.documentElement.style.setProperty("--on-splash", o[2]);
+        row.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+        b.setAttribute("aria-pressed", "true");
+      });
+      row.appendChild(b);
+    });
+    document.body.appendChild(panel);
+  })();
+</script>
+</body>
+</html>
