@@ -61,18 +61,11 @@
   .skip { position: absolute; left: 1rem; top: -4rem; background: var(--ink); color: var(--paper); padding: .5rem 1rem; z-index: 10; }
   .skip:focus { top: 1rem; }
 
-  /* ---------- Page layout: the pillar on the left, everything else on the right ---------- */
+  /* ---------- Page layout ---------- */
   .page {
-    max-width: 78rem;
+    max-width: 72rem;
     margin-inline: auto;
     padding-inline: clamp(1.25rem, 4vw, 3rem);
-  }
-  @media (min-width: 62.5em) {
-    .page { display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); column-gap: clamp(3rem, 6vw, 6.5rem); }
-    .only-narrow { display: none !important; }
-  }
-  @media (max-width: 62.49em) {
-    .only-wide { display: none !important; }
   }
 
   /* ---------- Display type ---------- */
@@ -115,95 +108,61 @@
   .btn-secondary:hover { background: var(--board); }
   @media (prefers-reduced-motion: reduce) { .btn-primary:hover { transform: none; } }
 
-  /* ---------- The pillar: wordmark, then the eight ways on a line ---------- */
-  .pillar {
-    position: sticky; top: 0;
-    align-self: start;
-    max-height: 100vh;
-    overflow-y: auto;
-    padding-block: 2.5rem;
-  }
+  /* ---------- Header ---------- */
   .brand { display: inline-block; }
-  .pillar .brand { display: block; }
-  .pillar .brand img { width: 100%; height: auto; }
-
-  .ways-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 1.15rem;
-    line-height: 1.1;
-    color: var(--slate);
-    margin: 2.25rem 0 0;
-    padding-left: 1.6rem;
-    position: relative;
-  }
-  .ways {
-    list-style: none;
-    padding: 0;
-    position: relative;
-  }
-  /* The line runs from the wordmark down through every way. */
-  .ways::before {
-    content: "";
-    position: absolute;
-    left: 5px; top: -3.3rem; bottom: .9rem;
-    width: 2px;
-    background: var(--ink);
-  }
-  .ways li {
-    position: relative;
-    padding: .55rem 0 .55rem 1.6rem;
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1.6rem;
-    line-height: 1;
-    text-transform: uppercase;
-  }
-  .ways li::before {
-    content: "";
-    position: absolute;
-    left: 0; top: 50%;
-    width: 12px; height: 12px;
-    margin-top: -6px;
-    background: var(--paper);
-    border: 2px solid var(--ink);
-    border-radius: 50%;
-  }
-  .ways li:last-child::before { background: var(--splash); }
-  .ways-note { font-size: .95rem; color: var(--slate); margin-top: 1rem; padding-left: 1.6rem; max-width: 15rem; }
-
-  /* In the narrow layout, the eight ways sit in the page as their own section. */
-  .ways-section .ways { margin-top: 2.5rem; columns: 2; column-gap: 1.5rem; }
-  .ways-section .ways::before { display: none; }
-  .ways-section .ways li { break-inside: avoid; }
-  .ways-section .ways-wrap { position: relative; }
-  .ways-section .ways-wrap::before {
-    content: ""; position: absolute; left: 5px; top: -2.5rem; bottom: .9rem; width: 2px; background: var(--ink);
-  }
-  @media (max-width: 30em) {
-    .ways-section .ways { columns: 1; }
-  }
-  @media (min-width: 30.01em) {
-    .ways-section .ways-wrap::before { display: none; }
-  }
-
-  /* ---------- Top bars ---------- */
   .topbar {
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     padding-block: 1.25rem;
   }
   .topbar .brand img { height: 2.9rem; width: auto; }
-  .topbar .btn { font-size: 1.1rem; padding: .65rem .9rem .6rem; }
-  .sitenav {
-    display: flex; align-items: center; justify-content: flex-end; gap: 1.75rem;
-    padding-block: 2.5rem 0;
-  }
+  .sitenav { display: flex; align-items: center; gap: 1.75rem; }
   .sitenav a:not(.btn) {
     font-family: var(--display); font-weight: 700; font-size: 1.25rem;
     text-decoration: none;
   }
   .sitenav a:not(.btn):hover { text-decoration: underline; text-decoration-color: var(--splash); }
   .sitenav .btn { font-size: 1.1rem; padding: .65rem .9rem .6rem; }
+  @media (min-width: 48em) {
+    .topbar { padding-block: 2rem 1rem; }
+    .topbar .brand img { height: 3.75rem; }
+  }
+  @media (max-width: 47.99em) {
+    .sitenav a:not(.btn) { display: none; }
+  }
+
+  /* ---------- Eight ways: the 8 in the middle, the words around it ---------- */
+  .ways-section { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 56em) {
+    .ways-section { grid-template-columns: minmax(0, 1fr) minmax(0, 30rem); column-gap: 4rem; }
+  }
+  .ways-intro p { max-width: 26rem; }
+  .ways-wheel {
+    position: relative;
+    width: 100%; max-width: 30rem;
+    aspect-ratio: 140 / 104;
+    container-type: inline-size;
+  }
+  .ways-wheel svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .ways-wheel .spoke { stroke: var(--rule); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  .ways-wheel .ring { fill: var(--sheet); stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .ways-wheel .eight { fill: var(--ink); }
+  .ways-wheel ul { list-style: none; padding: 0; margin: 0; }
+  .ways-wheel li {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: clamp(.85rem, 4.6cqi, 1.25rem);
+    font-weight: 500;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  .ways-wheel li:nth-child(1) { left: 50%;     top: 7.69%; }
+  .ways-wheel li:nth-child(2) { left: 78.57%;  top: 21.15%; }
+  .ways-wheel li:nth-child(3) { left: 87.14%;  top: 50%; }
+  .ways-wheel li:nth-child(4) { left: 78.57%;  top: 78.85%; }
+  .ways-wheel li:nth-child(5) { left: 50%;     top: 92.31%; }
+  .ways-wheel li:nth-child(6) { left: 21.43%;  top: 78.85%; }
+  .ways-wheel li:nth-child(7) { left: 12.86%;  top: 50%; }
+  .ways-wheel li:nth-child(8) { left: 21.43%;  top: 21.15%; }
 
   /* ---------- Sections ---------- */
   main > section { padding-block: clamp(3.5rem, 8vw, 5.5rem); }
@@ -260,6 +219,12 @@
     transform: rotate(-.45deg);
   }
   .sheet + .sheet { margin-top: 3.5rem; transform: rotate(.35deg); }
+  /* On wide screens the two sheets sit side by side, like notices on a board. */
+  @media (min-width: 80em) {
+    .sheets { display: grid; grid-template-columns: 1.35fr 1fr; gap: 3rem; align-items: start; }
+    .sheets .sheet { max-width: none; }
+    .sheets .sheet + .sheet { margin-top: 0; }
+  }
   .sheet::before, .sheet::after {
     content: "";
     position: absolute; top: -.8rem;
@@ -278,6 +243,7 @@
   td.num, th.num { text-align: right; padding-right: 0; white-space: nowrap; }
   .prices td.num { font-family: var(--display); font-weight: 800; font-size: 1.6rem; line-height: 1; }
   .where small { display: block; color: var(--slate); font-size: .9rem; }
+  .timetable tbody th, .timetable .time, .timetable .kind, .timetable thead th:not(:nth-child(3)) { width: 1%; white-space: nowrap; }
   .group-row th {
     font-family: var(--display); font-weight: 800; font-size: 1.35rem; text-transform: uppercase;
     padding-top: 1.5rem; border-bottom: 2px solid var(--ink);
@@ -341,38 +307,16 @@
 
 <div class="page">
 
-  <!-- ===== The pillar (wide screens only). EDIT the eight ways here AND in the "ways" section further down. ===== -->
-  <aside class="pillar only-wide" aria-label="Project 8 Fitness">
-    <a class="brand" href="#top"><img src="assets/wordmark.svg" alt="Project 8 Fitness" width="248" height="92"></a>
-    <p class="ways-title">Eight ways we progress</p>
-    <ul class="ways">
-      <li>Growth</li>
-      <li>Community</li>
-      <li>Kindness</li>
-      <li>Fitness</li>
-      <li>Fitness</li>
-      <li>Fitness</li>
-      <li>Fitness</li>
-      <li>Fitness</li>
-    </ul>
-  </aside>
-
-  <div class="content">
-
-    <!-- Top bar on phones and small screens -->
-    <header class="topbar only-narrow">
-      <a class="brand" href="#top"><img src="assets/wordmark.svg" alt="Project 8 Fitness" width="124" height="46"></a>
-      <a class="btn btn-primary" href="https://link.wunderbook.com/tenant?tenantName=EightK_Strength_and_Conditioning_">Book</a>
-    </header>
-
-    <!-- Navigation on wide screens -->
-    <nav class="sitenav only-wide" aria-label="Main">
+  <header class="topbar">
+    <a class="brand" href="#top"><img src="assets/wordmark.svg" alt="Project 8 Fitness" width="163" height="60"></a>
+    <nav class="sitenav" aria-label="Main">
       <a href="#sessions">Classes</a>
       <a href="#timetable">Timetable</a>
       <a href="#prices">Prices</a>
       <a href="#join">Join us</a>
       <a class="btn btn-primary" href="https://link.wunderbook.com/tenant?tenantName=EightK_Strength_and_Conditioning_">Book a class</a>
     </nav>
+  </header>
 
     <main id="main">
 
@@ -425,12 +369,26 @@
         </div>
       </section>
 
-      <!-- ===== Eight ways (narrow screens only). EDIT these AND the list in the pillar at the top. ===== -->
-      <section class="ways-section only-narrow" id="eight-ways" aria-labelledby="ways-title-narrow">
-        <h2 id="ways-title-narrow">Eight ways we progress</h2>
-        <p class="prose">The 8 in our name stands for eight things we work on together, in every session.</p>
-        <div class="ways-wrap">
-          <ul class="ways">
+      <!-- ===== Eight ways. EDIT the words in the list below. ===== -->
+      <section class="ways-section" id="eight-ways" aria-labelledby="ways-title">
+        <div class="ways-intro">
+          <h2 id="ways-title">Eight ways we progress</h2>
+          <p>The 8 in our name stands for eight things we work on together, in every session.</p>
+        </div>
+        <div class="ways-wheel">
+          <svg viewBox="0 0 140 104" aria-hidden="true" focusable="false">
+            <line class="spoke" x1="70.0" y1="34.5" x2="70.0" y2="16.0"/>
+            <line class="spoke" x1="84.0" y1="41.5" x2="102.0" y2="28.0"/>
+            <line class="spoke" x1="87.5" y1="52.0" x2="102.0" y2="52.0"/>
+            <line class="spoke" x1="84.0" y1="62.5" x2="102.0" y2="76.0"/>
+            <line class="spoke" x1="70.0" y1="69.5" x2="70.0" y2="88.0"/>
+            <line class="spoke" x1="56.0" y1="62.5" x2="38.0" y2="76.0"/>
+            <line class="spoke" x1="52.5" y1="52.0" x2="38.0" y2="52.0"/>
+            <line class="spoke" x1="56.0" y1="41.5" x2="38.0" y2="28.0"/>
+            <circle class="ring" cx="70" cy="52" r="14"/>
+            <path class="eight" d="M72.55 51.72Q73.33 52.17 73.73 53.09Q74.23 54.2 74.23 55.59Q74.23 56.84 73.85 57.78Q73.38 59.06 72.37 59.78Q71.37 60.5 69.98 60.5Q68.61 60.5 67.6 59.79Q66.6 59.08 66.13 57.81Q65.77 56.82 65.77 55.59Q65.77 54.2 66.2 53.2Q66.55 52.26 67.45 51.74Q67.54 51.67 67.45 51.6Q66.67 51.1 66.25 50.23Q65.77 49.21 65.77 47.96Q65.77 46.59 66.25 45.67Q66.72 44.63 67.7 44.07Q68.68 43.5 69.98 43.5Q71.25 43.5 72.23 44.05Q73.21 44.61 73.71 45.65Q74.23 46.64 74.23 47.96Q74.23 49.19 73.75 50.18Q73.33 51.06 72.55 51.55Q72.41 51.65 72.55 51.72ZM68.63 47.11Q68.47 47.54 68.47 48.2Q68.47 48.91 68.7 49.54Q68.87 50.04 69.2 50.32Q69.53 50.61 69.98 50.61Q70.47 50.61 70.81 50.31Q71.16 50.02 71.32 49.47Q71.51 48.91 71.51 48.2Q71.51 47.4 71.27 46.9Q71.11 46.4 70.78 46.13Q70.45 45.86 69.98 45.86Q69.55 45.86 69.23 46.11Q68.91 46.36 68.75 46.78ZM71.51 55.45Q71.51 54.55 71.3 53.91Q71.16 53.35 70.81 53.03Q70.47 52.71 69.98 52.71Q69.48 52.71 69.14 53.04Q68.8 53.37 68.65 53.98Q68.47 54.6 68.47 55.4Q68.47 56.13 68.61 56.75Q68.72 57.41 69.09 57.77Q69.46 58.14 69.98 58.14Q70.52 58.14 70.9 57.76Q71.27 57.38 71.39 56.7Q71.51 56.06 71.51 55.45Z"/>
+          </svg>
+          <ul>
             <li>Growth</li>
             <li>Community</li>
             <li>Kindness</li>
@@ -444,7 +402,7 @@
       </section>
 
       <!-- ===== Timetable and prices ===== -->
-      <section id="timetable" aria-labelledby="timetable-title">
+      <section id="timetable" class="sheets" aria-labelledby="timetable-title">
         <!-- EDIT: class times and places. Each class is one row (<tr>). -->
         <div class="sheet">
           <h2 id="timetable-title">Timetable</h2>
@@ -453,10 +411,10 @@
               <tr><th scope="col">Day</th><th scope="col">Time</th><th scope="col">Where</th><th scope="col" class="num">Indoors or out</th></tr>
             </thead>
             <tbody>
-              <tr><th scope="row">Tuesday</th><td class="time">6.30pm</td><td class="where">Opposite Duck&rsquo;s, South Road</td><td class="kind num">Outdoors</td></tr>
+              <tr><th scope="row">Tuesday</th><td class="time">6.30pm</td><td class="where">Opposite Duck&rsquo;s, South&nbsp;Road</td><td class="kind num">Outdoors</td></tr>
               <tr><th scope="row">Wednesday</th><td class="time">7.15pm</td><td class="where">Ashenground Community Centre<small>Southdown Close</small></td><td class="kind num">Indoors</td></tr>
-              <tr><th scope="row">Thursday</th><td class="time">6.30pm</td><td class="where">Opposite Duck&rsquo;s, South Road</td><td class="kind num">Outdoors</td></tr>
-              <tr><th scope="row">Sunday</th><td class="time">8am</td><td class="where">Opposite Duck&rsquo;s, South Road</td><td class="kind num">Outdoors</td></tr>
+              <tr><th scope="row">Thursday</th><td class="time">6.30pm</td><td class="where">Opposite Duck&rsquo;s, South&nbsp;Road</td><td class="kind num">Outdoors</td></tr>
+              <tr><th scope="row">Sunday</th><td class="time">8am</td><td class="where">Opposite Duck&rsquo;s, South&nbsp;Road</td><td class="kind num">Outdoors</td></tr>
             </tbody>
           </table>
           <div class="sheet-notes">
@@ -550,7 +508,6 @@
       <p>&copy; 2026 Project 8 Fitness</p>
     </footer>
 
-  </div>
 </div>
 
 <script>

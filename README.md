@@ -12,7 +12,7 @@ Look for comments starting `EDIT:` in `index.html`. They mark the bits you're mo
 
 - **Class times and places**: the `Timetable` table. Each class is one row, starting `<tr>`.
 - **Prices**: the `Prices` table, just below the timetable.
-- **The eight ways**: these appear twice, once in the sidebar for wide screens and once in the page for phones. Change both.
+- **The eight ways**: the list in the `Eight ways we progress` section. Keep it to eight words, and short ones fit best around the 8.
 - **Coach bios**: in the `Who coaches you` section.
 - **Company details**: in the footer. Once Project 8 Fitness Ltd is registered, the company number and registered office need to go on the site.
 
