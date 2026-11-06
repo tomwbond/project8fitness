@@ -201,32 +201,18 @@
     text-transform: uppercase; color: var(--slate); text-align: center;
     margin-top: 2.5rem; padding: .5rem .75rem; background: var(--board);
   }
-  .hero-media .next-class { margin: -3rem .75rem 0 auto; }
   @media (min-width: 68em) {
     .hero-photo { aspect-ratio: 4 / 5; }
-    .hero-media .next-class { position: absolute; left: -4rem; bottom: -2.5rem; margin: 0; width: 18rem; }
   }
 
-  /* The "next class" notice in the hero. It stays hidden unless the script below fills it in. */
+  /* "Next class" caption over the bottom of the photo. Hidden unless the script below fills it in. */
   .next-class {
-    position: relative;
-    background: var(--sheet);
-    padding: 1.6rem 1.5rem 1.4rem;
-    max-width: 21rem;
-    box-shadow: 0 1px 1px rgba(35,37,31,.08), 0 14px 28px -18px rgba(35,37,31,.45);
-    transform: rotate(1.2deg);
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: var(--ink); color: var(--paper);
+    padding: .75rem 1rem .8rem;
+    font-size: 1rem; line-height: 1.4;
   }
-  .next-class::before {
-    content: ""; position: absolute; top: -.8rem; left: 50%;
-    width: 5.5rem; height: 1.6rem; margin-left: -2.75rem;
-    background: rgba(206, 203, 190, .72); transform: rotate(-3deg);
-  }
-  .next-class h2 { font-size: 1.5rem; margin-bottom: .9rem; }
-  .next-when { font-family: var(--display); font-weight: 800; font-size: 2.6rem; line-height: .95; text-transform: uppercase; }
-  .next-when span { display: block; }
-  .next-where { margin-top: .9rem; line-height: 1.4; }
-  .next-where .tag { display: table; margin-bottom: .45rem; }
-  .next-book { display: inline-block; margin-top: 1rem; font-weight: 700; }
+  .next-class b { font-weight: 700; }
 
   /* ---------- A typical hour ---------- */
   .hour { margin-top: 2.75rem; max-width: 44rem; }
@@ -413,13 +399,8 @@
             <p class="placeholder-label">Photo coming soon</p>
           </div>
 
-        <!-- Filled in automatically from the timetable by the script at the bottom of the page -->
-        <aside class="next-class" aria-labelledby="next-title" hidden>
-          <h2 id="next-title">Next class</h2>
-          <p class="next-when"><span class="next-day"></span><span class="next-time"></span></p>
-          <p class="next-where"></p>
-          <a class="next-book" href="https://link.wunderbook.com/tenant?tenantName=EightK_Strength_and_Conditioning_">Book on Wunderbook</a>
-        </aside>
+        <!-- The "next class" caption is filled in automatically from the timetable by the script at the bottom of the page -->
+        <p class="next-class" hidden><b>Next class:</b> <span class="next-text"></span></p>
         </div>
       </section>
 
@@ -610,7 +591,7 @@
 </div>
 
 <script>
-  /* Next class: finds the next class in the timetable and shows it in the hero card. */
+  /* Next class: finds the next class in the timetable and shows it as a caption on the hero photo. */
   (function () {
     var card = document.querySelector(".next-class");
     var rows = document.querySelectorAll(".timetable tr[data-day]");
@@ -629,15 +610,15 @@
     });
     if (!best) return;
     var dayName = best.row.querySelector("th").textContent;
-    card.querySelector(".next-day").textContent = best.add === 0 ? "Today" : best.add === 1 ? "Tomorrow" : dayName;
-    card.querySelector(".next-time").textContent = best.row.querySelector(".time").textContent;
+    var day = best.add === 0 ? "today at" : best.add === 1 ? "tomorrow at" : dayName;
+    var time = best.row.querySelector(".time").textContent;
     var where = best.row.querySelector(".where").cloneNode(true);
     var small = where.querySelector("small");
     if (small) small.remove();
-    var tag = best.row.querySelector(".kind .tag");
-    var whereLine = card.querySelector(".next-where");
-    if (tag) whereLine.appendChild(tag.cloneNode(true));
-    whereLine.appendChild(document.createTextNode(where.textContent.trim()));
+    where = where.textContent.trim();
+    /* "Opposite Duck's" reads as "opposite Duck's" mid-sentence */
+    if (/^(Opposite|Outside|Behind|Near|By|At|On|In) /.test(where)) where = where.charAt(0).toLowerCase() + where.slice(1);
+    card.querySelector(".next-text").textContent = day + " " + time + ", " + where + ".";
     card.hidden = false;
   })();
 </script>
