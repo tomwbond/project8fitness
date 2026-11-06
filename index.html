@@ -223,11 +223,12 @@
   /* EDIT: the bar's proportions. Keep these numbers in step with the minutes in the key below. */
   .hour-bar {
     display: grid;
-    grid-template-columns: 10fr 20fr 10fr 5fr 5fr;
+    grid-template-columns: 10fr 10fr 20fr 10fr 5fr 5fr;
     border: 2px solid var(--ink);
     height: 3rem;
   }
   .hour-bar span + span { border-left: 2px solid var(--ink); }
+  .seg-warm, .key-warm::before { background: color-mix(in srgb, var(--splash) 35%, var(--sheet)); }
   .seg-mobility, .key-mobility::before { background: var(--board); }
   .seg-cond, .key-cond::before { background: var(--splash); }
   .seg-strength, .key-strength::before { background: var(--rule); }
@@ -392,17 +393,18 @@
         <div class="prose">
           <!-- This first line is adapted from Stephen's 8K Fitness description -->
           <p class="lede">We believe everyone deserves to feel stronger, move better, and enjoy being active, whatever their age, ability, or experience.</p>
-          <p>Every session is an hour long and each is different. We build useful strength, cultivate mobility, and improve fitness through fun and challenging circuits. We work hard, rest, then go again.</p>
+          <p>Each session is different. We build useful strength, cultivate mobility, and improve fitness through fun and challenging circuits. We work hard, rest, then go again.</p>
           <p>Our classes use ideas from a range of disciplines and include options to scale each exercise up or down, so you&rsquo;ll be exercising at your own level.</p>
         </div>
 
         <figure class="hour">
           <figcaption class="hour-caption">A typical hour (no two are quite the same)</figcaption>
           <div class="hour-bar" aria-hidden="true">
-            <span class="seg-mobility"></span><span class="seg-cond"></span><span class="seg-strength"></span><span class="seg-finish"></span><span class="seg-cool"></span>
+            <span class="seg-warm"></span><span class="seg-mobility"></span><span class="seg-cond"></span><span class="seg-strength"></span><span class="seg-finish"></span><span class="seg-cool"></span>
           </div>
           <!-- EDIT: the parts of a typical hour. If you change the minutes, change the bar's proportions in the CSS too. -->
           <ol class="hour-key">
+            <li class="key-warm"><b>Warm-up</b> 10 min</li>
             <li class="key-mobility"><b>Mobility</b> 10 min</li>
             <li class="key-cond"><b>Conditioning</b> 20 min</li>
             <li class="key-strength"><b>Strength</b> 10 min</li>
@@ -418,7 +420,7 @@
           </div>
           <div>
             <h3>Indoors</h3>
-            <p>Wednesday evening at Ashenground Community Centre. The same hard work, but with less running and more shelter. Indoors, we also offer slower, more targeted, and mobility-focused sessions.</p>
+            <p>Wednesday evening at Ashenground Community Centre. The same hard work, but with less running and more shelter. From time to time, indoor sessions become slower, more targeted, and mobility-focused.</p>
           </div>
         </div>
       </section>
@@ -532,7 +534,7 @@
             <li>Arrive 10 minutes early so we can say hello.</li>
             <li>Tell us about any injuries or health conditions before we start.</li>
             <li>Bring water (and a yoga or camping mat for indoor classes).</li>
-            <li>Wear layers you can move in.</li>
+            <li>Wear layers you can move in, and gloves in the winter.</li>
             <li>Trainers with grip if it&rsquo;s wet out.</li>
           </ul>
         </div>
