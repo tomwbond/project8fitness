@@ -207,6 +207,12 @@
   }
 
   .two-up { display: grid; gap: 2rem; margin-top: 3rem; max-width: 46rem; }
+  /* On wide screens the class description sits on the left, with the typical hour and the indoor/outdoor notes beside it. */
+  @media (min-width: 72em) {
+    .classes-grid { display: grid; grid-template-columns: minmax(0, 36rem) minmax(0, 1fr); column-gap: clamp(3rem, 5vw, 5rem); align-items: start; }
+    .classes-side .hour { margin-top: .5rem; }
+    .classes-side .two-up { grid-template-columns: 1fr; gap: 1.75rem; margin-top: 2.75rem; }
+  }
   @media (min-width: 40em) { .two-up { grid-template-columns: 1fr 1fr; gap: 2.5rem; } }
 
   /* ---------- Sheets: timetable and prices, pinned up like a notice ---------- */
@@ -334,37 +340,43 @@
       <!-- ===== What our classes are like ===== -->
       <section id="sessions" aria-labelledby="sessions-title">
         <h2 id="sessions-title">What our classes are like</h2>
-        <div class="prose">
-          <!-- This first line is adapted from Stephen's 8K Fitness description -->
-          <p class="lede">We believe everyone deserves to feel stronger, move better, and enjoy being active, whatever their age, ability, or experience.</p>
-          <p>Each session is different. We build useful strength, cultivate mobility, and improve fitness through fun and challenging circuits. We work hard, rest, then go again.</p>
-          <p>Our classes use ideas from a range of disciplines and include options to scale each exercise up or down, so you&rsquo;ll be exercising at your own level.</p>
-        </div>
-
-        <figure class="hour">
-          <figcaption class="hour-caption">A typical hour (no two are quite the same)</figcaption>
-          <div class="hour-bar" aria-hidden="true">
-            <span class="seg-warm"></span><span class="seg-mobility"></span><span class="seg-cond"></span><span class="seg-strength"></span><span class="seg-finish"></span><span class="seg-cool"></span>
+        <div class="classes-grid">
+          <div class="prose">
+            <!-- This first line is adapted from Stephen's 8K Fitness description -->
+            <p class="lede">We believe everyone deserves to feel stronger, move better, and enjoy being active, whatever their age, ability, or experience.</p>
+            <p>We&rsquo;re more than a fitness class. We&rsquo;re a welcoming community where people come together, build confidence, and support each other, whatever stage they&rsquo;re at.</p>
+            <p>Each session is different. We build useful strength, cultivate mobility, and improve fitness through fun and challenging circuits. We work hard, rest, then go again.</p>
+            <p>Our classes use ideas from a range of disciplines and include options to scale each exercise up or down, so you&rsquo;ll be exercising at your own level. Small groups mean more coaching, more encouragement, and more support for each person.</p>
+            <p>Whether you&rsquo;re working towards your first 5K, training for your sport, looking to reduce your risk of injury, or just want to feel healthier, we&rsquo;re here to help.</p>
           </div>
-          <!-- EDIT: the parts of a typical hour. If you change the minutes, change the bar's proportions in the CSS too. -->
-          <ol class="hour-key">
-            <li class="key-warm"><b>Warm-up</b> 10 min</li>
-            <li class="key-mobility"><b>Mobility</b> 10 min</li>
-            <li class="key-cond"><b>Conditioning</b> 20 min</li>
-            <li class="key-strength"><b>Strength</b> 10 min</li>
-            <li class="key-finish"><b>Finisher</b> 5 min</li>
-            <li class="key-cool"><b>Cool-down</b> 5 min</li>
-          </ol>
-        </figure>
 
-        <div class="two-up">
-          <div>
-            <h3>Outdoors</h3>
-            <p>Bootcamp-style classes on Tuesday, Thursday, and Sunday. Bodyweight work, running, and partner drills in every season.</p>
-          </div>
-          <div>
-            <h3>Indoors</h3>
-            <p>Wednesday evening at Ashenground Community Centre. The same hard work, but with less running and more shelter. From time to time, indoor sessions become slower, more targeted, and mobility-focused.</p>
+          <div class="classes-side">
+            <figure class="hour">
+              <figcaption class="hour-caption">A typical hour (no two are quite the same)</figcaption>
+              <div class="hour-bar" aria-hidden="true">
+                <span class="seg-warm"></span><span class="seg-mobility"></span><span class="seg-cond"></span><span class="seg-strength"></span><span class="seg-finish"></span><span class="seg-cool"></span>
+              </div>
+              <!-- EDIT: the parts of a typical hour. If you change the minutes, change the bar's proportions in the CSS too. -->
+              <ol class="hour-key">
+                <li class="key-warm"><b>Warm-up</b> 10 min</li>
+                <li class="key-mobility"><b>Mobility</b> 10 min</li>
+                <li class="key-cond"><b>Conditioning</b> 20 min</li>
+                <li class="key-strength"><b>Strength</b> 10 min</li>
+                <li class="key-finish"><b>Finisher</b> 5 min</li>
+                <li class="key-cool"><b>Cool-down</b> 5 min</li>
+              </ol>
+            </figure>
+
+            <div class="two-up">
+              <div>
+                <h3>Outdoors</h3>
+                <p>Bootcamp-style classes on Tuesday, Thursday, and Sunday. Bodyweight work, running, and partner drills in every season.</p>
+              </div>
+              <div>
+                <h3>Indoors</h3>
+                <p>Wednesday evening at Ashenground Community Centre. The same hard work, but with less running and more shelter. From time to time, indoor sessions become slower, more targeted, and mobility-focused.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -373,7 +385,7 @@
       <section class="ways-section" id="eight-ways" aria-labelledby="ways-title">
         <div class="ways-intro">
           <h2 id="ways-title">Eight ways we progress</h2>
-          <p>The 8 in our name stands for eight things we work on together, in every session.</p>
+          <p>The 8 in our name stands for eight things we work on together, in every session, so we each get a little better than yesterday.</p>
         </div>
         <div class="ways-wheel">
           <svg viewBox="0 0 140 104" aria-hidden="true" focusable="false">
@@ -454,7 +466,7 @@
           <div class="coach">
             <h3>Stephen Luxton</h3>
             <p class="role">Strength and conditioning coach</p>
-            <p>Stephen has over 10 years&rsquo; experience across specialist healthcare and the fitness industry. He started 8K Fitness, which has grown into Project 8, and he&rsquo;ll help you understand how your body moves, and get it moving better.</p>
+            <p>Stephen has over 10 years&rsquo; experience across specialist healthcare and the fitness industry. He started 8K Fitness, which has grown into Project 8, and he&rsquo;ll help you understand how your body moves, get it moving better, and build confidence along the way.</p>
           </div>
           <div class="coach">
             <!-- EDIT: Tom's bio is a draft -->
