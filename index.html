@@ -140,15 +140,6 @@
     .ways-section { grid-template-columns: minmax(0, 1fr) minmax(0, 30rem); column-gap: 4rem; }
   }
   .ways-intro p { max-width: 26rem; }
-  /* The section sits on a full-width band of the splash colour. */
-  .band { position: relative; isolation: isolate; color: var(--on-splash); }
-  .band::before {
-    content: ""; position: absolute; z-index: -1;
-    top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
-    background-color: var(--splash); background-image: var(--grain);
-  }
-  main > section.band, main > section.band + section { border-top: 0; }
-  .band .ways-wheel .spoke { stroke: currentColor; opacity: .55; }
   .ways-wheel {
     position: relative;
     width: 100%; max-width: 30rem;
@@ -157,8 +148,8 @@
   }
   .ways-wheel svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
   .ways-wheel .spoke { stroke: var(--rule); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-  .ways-wheel .ring { fill: var(--sheet); stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
-  .ways-wheel .eight { fill: var(--ink); }
+  .ways-wheel .ring { fill: var(--splash); stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .ways-wheel .eight { fill: var(--on-splash); }
   .ways-wheel ul { list-style: none; padding: 0; margin: 0; }
   .ways-wheel li {
     position: absolute;
@@ -188,9 +179,32 @@
   .hero .lede { margin-top: 2rem; font-weight: 600; }
   .hero .sub-lede { margin-top: 1rem; color: var(--slate); max-width: 32rem; }
   .hero .actions { margin-top: 2.25rem; }
-  .hero { display: grid; row-gap: 3.5rem; align-items: center; }
+  .hero { display: grid; row-gap: 3rem; align-items: center; }
   @media (min-width: 68em) {
-    .hero { grid-template-columns: minmax(0, 1fr) 19rem; column-gap: 4rem; }
+    .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 24rem); column-gap: 4rem; }
+    .hero h1 { font-size: clamp(3.4rem, 7.2vw, 6rem); }
+  }
+
+  /* Hero photo. Until there's a real photo, a placeholder shows where it will go. */
+  .hero-media { position: relative; }
+  .hero-photo {
+    aspect-ratio: 4 / 3;
+    border: 2px solid var(--ink);
+    background-color: var(--board);
+    background-image: repeating-linear-gradient(-45deg, transparent 0 14px, rgba(35,37,31,.07) 14px 16px);
+    display: grid; place-items: start center;
+    overflow: hidden;
+  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+  .hero-photo .placeholder-label {
+    font-family: var(--display); font-weight: 800; font-size: 1.4rem; line-height: 1.1;
+    text-transform: uppercase; color: var(--slate); text-align: center;
+    margin-top: 2.5rem; padding: .5rem .75rem; background: var(--board);
+  }
+  .hero-media .next-class { margin: -3rem .75rem 0 auto; }
+  @media (min-width: 68em) {
+    .hero-photo { aspect-ratio: 4 / 5; }
+    .hero-media .next-class { position: absolute; left: -4rem; bottom: -2.5rem; margin: 0; width: 18rem; }
   }
 
   /* The "next class" notice in the hero. It stays hidden unless the script below fills it in. */
@@ -391,13 +405,22 @@
         </div>
         </div>
 
+        <div class="hero-media">
+          <!-- EDIT: to add the photo, replace this placeholder <div> with:
+               <div class="hero-photo"><img src="assets/hero.jpg" alt="Describe what's happening in the photo"></div>
+               and put the photo in the assets folder. It's shown in black and white automatically. -->
+          <div class="hero-photo" role="img" aria-label="Placeholder: a photo of a Project 8 session is coming soon">
+            <p class="placeholder-label">Photo coming soon</p>
+          </div>
+
         <!-- Filled in automatically from the timetable by the script at the bottom of the page -->
         <aside class="next-class" aria-labelledby="next-title" hidden>
           <h2 id="next-title">Next class</h2>
           <p class="next-when"><span class="next-day"></span><span class="next-time"></span></p>
           <p class="next-where"></p>
-          <a class="next-book" href="https://link.wunderbook.com/tenant?tenantName=EightK_Strength_and_Conditioning_">Book a place on Wunderbook</a>
+          <a class="next-book" href="https://link.wunderbook.com/tenant?tenantName=EightK_Strength_and_Conditioning_">Book on Wunderbook</a>
         </aside>
+        </div>
       </section>
 
       <!-- ===== What our classes are like ===== -->
@@ -444,7 +467,7 @@
       </section>
 
       <!-- ===== Eight ways. EDIT the words in the list below. ===== -->
-      <section class="ways-section band" id="eight-ways" aria-labelledby="ways-title">
+      <section class="ways-section" id="eight-ways" aria-labelledby="ways-title">
         <div class="ways-intro">
           <h2 id="ways-title">Eight ways we progress</h2>
           <p>The 8 in our name stands for eight things we work on together, in every session, so we each get a little better than yesterday.</p>
