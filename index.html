@@ -220,7 +220,7 @@
   /* EDIT: the bar's proportions. Keep these numbers in step with the minutes in the key below. */
   .hour-bar {
     display: grid;
-    grid-template-columns: 10fr 10fr 20fr 10fr 5fr 5fr;
+    grid-template-columns: 10fr 25fr 5fr 10fr 5fr 5fr;
     border: 2px solid var(--ink);
     height: 3rem;
   }
@@ -420,13 +420,13 @@
             <figure class="hour">
               <figcaption class="hour-caption">A typical hour (no two are quite the same)</figcaption>
               <div class="hour-bar" aria-hidden="true">
-                <span class="seg-warm"></span><span class="seg-mobility"></span><span class="seg-cond"></span><span class="seg-strength"></span><span class="seg-finish"></span><span class="seg-cool"></span>
+                <span class="seg-warm"></span><span class="seg-cond"></span><span class="seg-mobility"></span><span class="seg-strength"></span><span class="seg-finish"></span><span class="seg-cool"></span>
               </div>
               <!-- EDIT: the parts of a typical hour. If you change the minutes, change the bar's proportions in the CSS too. -->
               <ol class="hour-key">
                 <li class="key-warm"><b>Warm-up</b> 10 min</li>
-                <li class="key-mobility"><b>Mobility</b> 10 min</li>
-                <li class="key-cond"><b>Conditioning</b> 20 min</li>
+                <li class="key-cond"><b>Conditioning</b> 25 min</li>
+                <li class="key-mobility"><b>Mobility</b> 5 min</li>
                 <li class="key-strength"><b>Strength</b> 10 min</li>
                 <li class="key-finish"><b>Finisher</b> 5 min</li>
                 <li class="key-cool"><b>Cool-down</b> 5 min</li>
