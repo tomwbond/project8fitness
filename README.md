@@ -25,11 +25,15 @@ To try other accent colours in the browser, add `?colours` to the end of the add
 ## Files
 
 - `index.html`: the whole page
-- `assets/wordmark.svg`: the Project / Fitness lockup with the 8 spanning both lines
-- `assets/wordmark-simple.svg`: the simpler two-line version (Project 8 / Fitness)
-- `assets/favicon.svg`: the browser tab icon
+- `assets/logo.svg`: the logo used in the header. The 8 is built from eight segments, one for each of the eight ways, with one in the accent orange
+- `assets/logo-reversed.svg`: the same logo in off-white, for dark backgrounds
+- `assets/mark.svg`: the eight-segment 8 on its own
+- `assets/favicon.svg`: the browser tab icon (the eight-segment 8 on a dark square)
+- `assets/wordmark.svg` and `assets/wordmark-simple.svg`: the earlier text-only versions, kept for reference and no longer used on the site
 - `assets/fonts/`: Barlow Condensed (headings) and Atkinson Hyperlegible Next (body text), both open-source and stored here so the site makes no third-party requests
 - `notes/`: source material, not part of the live site
+
+The orange in the logo files is fixed at `#FF5B1A`. If you change `--splash`, change it in those files too.
 
 ## Turning on GitHub Pages
 
