@@ -30,10 +30,10 @@ To try other accent colours in the browser, add `?colours` to the end of the add
 - `assets/mark.svg`: the eight-segment 8 on its own
 - `assets/favicon.svg`: the browser tab icon (the eight-segment 8 on a dark square)
 - `assets/wordmark.svg` and `assets/wordmark-simple.svg`: the earlier text-only versions, kept for reference and no longer used on the site
-
-The orange in the logo files is fixed at `#FF5B1A`. If you change `--splash`, change it in those files too.
 - `assets/fonts/`: Barlow Condensed (headings) and Atkinson Hyperlegible Next (body text), both open-source and stored here so the site makes no third-party requests
 - `notes/`: source material, not part of the live site
+
+The orange in the logo files is fixed at `#FF5B1A`. If you change `--splash`, change it in those files too.
 
 ## Turning on GitHub Pages
 
