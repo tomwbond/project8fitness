@@ -205,14 +205,6 @@
     .hero-photo { aspect-ratio: 4 / 5; }
   }
 
-  /* "Next class" caption over the bottom of the photo. Hidden unless the script below fills it in. */
-  .next-class {
-    position: absolute; left: 0; right: 0; bottom: 0;
-    background: var(--ink); color: var(--paper);
-    padding: .75rem 1rem .8rem;
-    font-size: 1rem; line-height: 1.4;
-  }
-  .next-class b { font-weight: 700; }
 
   /* ---------- A typical hour ---------- */
   .hour { margin-top: 2.75rem; max-width: 44rem; }
@@ -279,6 +271,7 @@
   .sheet::before { left: 1.25rem; transform: rotate(-4deg); }
   .sheet::after { right: 1.25rem; transform: rotate(5deg); }
   .sheet h2 { margin-bottom: 1.25rem; }
+  .sheet-intro { margin: -.5rem 0 1rem; }
 
   table { border-collapse: collapse; width: 100%; }
   th, td { text-align: left; vertical-align: baseline; padding: .8rem .75rem .8rem 0; border-bottom: 1px solid var(--rule); }
@@ -399,8 +392,6 @@
             <p class="placeholder-label">Photo coming soon</p>
           </div>
 
-        <!-- The "next class" caption is filled in automatically from the timetable by the script at the bottom of the page -->
-        <p class="next-class" hidden><b>Next class:</b> <span class="next-text"></span></p>
         </div>
       </section>
 
@@ -481,24 +472,23 @@
 
       <!-- ===== Timetable and prices ===== -->
       <section id="timetable" class="sheets" aria-labelledby="timetable-title">
-        <!-- EDIT: class times and places. Each class is one row (<tr>).
-             If you change a day or time, also change data-day (0 = Sunday, 1 = Monday ... 6 = Saturday)
-             and data-time (24-hour clock). The "next class" card in the hero reads these. -->
+        <!-- EDIT: class times and places. Each class is one row (<tr>). -->
         <div class="sheet">
           <h2 id="timetable-title">Timetable</h2>
+          <p class="sheet-intro">Our usual week:</p>
           <table class="timetable">
             <thead>
               <tr><th scope="col">Day</th><th scope="col">Time</th><th scope="col">Where</th><th scope="col" class="num">Indoors or out</th></tr>
             </thead>
             <tbody>
-              <tr data-day="2" data-time="18:30"><th scope="row">Tuesday</th><td class="time">6.30pm</td><td class="where">Opposite Duck&rsquo;s, South&nbsp;Road</td><td class="kind num"><span class="tag tag-out">Outdoors</span></td></tr>
-              <tr data-day="3" data-time="19:15"><th scope="row">Wednesday</th><td class="time">7.15pm</td><td class="where">Ashenground Community Centre<small>Southdown Close</small></td><td class="kind num"><span class="tag tag-in">Indoors</span></td></tr>
-              <tr data-day="4" data-time="18:30"><th scope="row">Thursday</th><td class="time">6.30pm</td><td class="where">Opposite Duck&rsquo;s, South&nbsp;Road</td><td class="kind num"><span class="tag tag-out">Outdoors</span></td></tr>
-              <tr data-day="0" data-time="08:00"><th scope="row">Sunday</th><td class="time">8am</td><td class="where">Opposite Duck&rsquo;s, South&nbsp;Road</td><td class="kind num"><span class="tag tag-out">Outdoors</span></td></tr>
+              <tr><th scope="row">Tuesday</th><td class="time">6.30pm</td><td class="where">Opposite Duck&rsquo;s, South&nbsp;Road</td><td class="kind num"><span class="tag tag-out">Outdoors</span></td></tr>
+              <tr><th scope="row">Wednesday</th><td class="time">7.15pm</td><td class="where">Ashenground Community Centre<small>Southdown Close</small></td><td class="kind num"><span class="tag tag-in">Indoors</span></td></tr>
+              <tr><th scope="row">Thursday</th><td class="time">6.30pm</td><td class="where">Opposite Duck&rsquo;s, South&nbsp;Road</td><td class="kind num"><span class="tag tag-out">Outdoors</span></td></tr>
+              <tr><th scope="row">Sunday</th><td class="time">8am</td><td class="where">Opposite Duck&rsquo;s, South&nbsp;Road</td><td class="kind num"><span class="tag tag-out">Outdoors</span></td></tr>
             </tbody>
           </table>
           <div class="sheet-notes">
-            <p>Every class lasts an hour. Please book ahead so we know you&rsquo;re coming. If there&rsquo;s any change of plan, we&rsquo;ll post it in the WhatsApp community.</p>
+            <p>Every class lasts an hour. Please book ahead so we know you&rsquo;re coming. Classes sometimes change, so please check Wunderbook and/or WhatsApp before you come.</p>
           </div>
         </div>
 
@@ -589,38 +579,6 @@
 
 </div>
 
-<script>
-  /* Next class: finds the next class in the timetable and shows it as a caption on the hero photo. */
-  (function () {
-    var card = document.querySelector(".next-class");
-    var rows = document.querySelectorAll(".timetable tr[data-day]");
-    if (!card || !rows.length) return;
-    var now = new Date(), best = null;
-    rows.forEach(function (row) {
-      var day = Number(row.getAttribute("data-day"));
-      var hm = row.getAttribute("data-time").split(":");
-      for (var add = 0; add < 8; add++) {
-        var when = new Date(now.getFullYear(), now.getMonth(), now.getDate() + add, Number(hm[0]), Number(hm[1]));
-        if (when.getDay() === day && when > now) {
-          if (!best || when < best.when) best = { when: when, add: add, row: row };
-          break;
-        }
-      }
-    });
-    if (!best) return;
-    var dayName = best.row.querySelector("th").textContent;
-    var day = best.add === 0 ? "today at" : best.add === 1 ? "tomorrow at" : dayName;
-    var time = best.row.querySelector(".time").textContent;
-    var where = best.row.querySelector(".where").cloneNode(true);
-    var small = where.querySelector("small");
-    if (small) small.remove();
-    where = where.textContent.trim();
-    /* "Opposite Duck's" reads as "opposite Duck's" mid-sentence */
-    if (/^(Opposite|Outside|Behind|Near|By|At|On|In) /.test(where)) where = where.charAt(0).toLowerCase() + where.slice(1);
-    card.querySelector(".next-text").textContent = day + " " + time + ", " + where + ".";
-    card.hidden = false;
-  })();
-</script>
 <script>
   /* Colour tryout: add ?colours to the end of the address to show a small panel for
      trying different splash colours. Delete this script once you've chosen. */
